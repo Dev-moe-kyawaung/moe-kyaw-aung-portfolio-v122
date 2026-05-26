@@ -1,0 +1,1539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- ===================================================
+         META & SEO OPTIMIZATION
+         =================================================== -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="⭐MOE KYAW AUNG⭐ - Android Senior Developer | Premium Portfolio | Expert in Kotlin, Jetpack, Firebase & Clean Architecture">
+    <meta name="keywords" content="Android Developer, Kotlin, Jetpack, Firebase, Clean Architecture, Mobile Development, React Portfolio, Senior Developer">
+    <meta name="author" content="Moe Kyaw Aung">
+    <meta name="theme-color" content="#d4a843">
+    <meta property="og:title" content="Moe Kyaw Aung - Android Senior Developer Portfolio V122">
+    <meta property="og:description" content="Premium portfolio showcasing 12+ years of Android development expertise with modern design and interactive features">
+    <meta property="og:type" content="website">
+    
+    <title>Moe Kyaw Aung - Android Senior Developer Portfolio V122</title>
+
+    <!-- ===================================================
+         GOOGLE FONTS
+         =================================================== -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- ===================================================
+         FONT AWESOME ICONS
+         =================================================== -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- ===================================================
+         REACT & BABEL (FROM CDN)
+         =================================================== -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://unpkg.com/styled-components/dist/styled-components.min.js"></script>
+
+    <!-- ===================================================
+         GLOBAL STYLES
+         =================================================== -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scrollbar-width: thin;
+            scrollbar-color: #d4a843 #f5f5f5;
+        }
+
+        html::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        html::-webkit-scrollbar-track {
+            background: #f5f5f5;
+        }
+
+        html::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #d4a843, #e8c86e);
+            border-radius: 10px;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #ffffff;
+            color: #333333;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            overflow-x: hidden;
+        }
+
+        body.dark-mode {
+            background: #1a1a1a;
+            color: #f0f0f0;
+        }
+
+        body.dark-mode html::-webkit-scrollbar-thumb {
+            background: #d4a843;
+        }
+
+        /* Base animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.5;
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes shimmer {
+            0% {
+                background-position: -1000px 0;
+            }
+            100% {
+                background-position: 1000px 0;
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+
+        .fade-in-delay-1 { animation-delay: 0.1s; }
+        .fade-in-delay-2 { animation-delay: 0.2s; }
+        .fade-in-delay-3 { animation-delay: 0.3s; }
+        .fade-in-delay-4 { animation-delay: 0.4s; }
+        .fade-in-delay-5 { animation-delay: 0.5s; }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <!-- ===================================================
+         REACT APPLICATION (BABEL JSX)
+         =================================================== -->
+    <script type="text/babel">
+        const { useState, useEffect, useRef } = React;
+        const styled = window.styled.default;
+
+        // ★ STYLED COMPONENTS ★
+        
+        // Global wrapper
+        const AppWrapper = styled.div`
+            width: 100%;
+            min-height: 100vh;
+            background: ${props => props.isDark ? '#1a1a1a' : '#ffffff'};
+            color: ${props => props.isDark ? '#f0f0f0' : '#333333'};
+            transition: background-color 0.3s ease, color 0.3s ease;
+        `;
+
+        // Navigation
+        const NavBar = styled.nav`
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: ${props => props.isDark ? 'rgba(26, 26, 26, 0.95)' : 'rgba(255, 255, 255, 0.95)'};
+            backdrop-filter: blur(30px);
+            border-bottom: 1px solid ${props => props.isDark ? 'rgba(212, 168, 67, 0.2)' : 'rgba(212, 168, 67, 0.15)'};
+            padding: 1rem 2rem;
+            transition: all 0.3s ease;
+            box-shadow: ${props => props.scrolled ? '0 4px 20px rgba(212, 168, 67, 0.1)' : 'none'};
+            
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            @media (max-width: 768px) {
+                padding: 1rem;
+            }
+        `;
+
+        const Logo = styled.div`
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: #d4a843;
+            letter-spacing: 2px;
+            
+            @media (max-width: 768px) {
+                font-size: 1.2rem;
+            }
+        `;
+
+        const HamburgerButton = styled.button`
+            display: none;
+            flex-direction: column;
+            background: none;
+            border: none;
+            cursor: pointer;
+            gap: 6px;
+            z-index: 1001;
+
+            @media (max-width: 768px) {
+                display: flex;
+            }
+
+            span {
+                width: 25px;
+                height: 3px;
+                background: ${props => props.isDark ? '#d4a843' : '#333333'};
+                border-radius: 3px;
+                transition: all 0.3s ease;
+            }
+
+            ${props => props.active && `
+                span:nth-child(1) {
+                    transform: rotate(45deg) translate(8px, 8px);
+                }
+                span:nth-child(2) {
+                    opacity: 0;
+                }
+                span:nth-child(3) {
+                    transform: rotate(-45deg) translate(7px, -7px);
+                }
+            `}
+        `;
+
+        const MobileMenu = styled.div`
+            position: fixed;
+            top: 70px;
+            left: 0;
+            right: 0;
+            background: ${props => props.isDark ? 'rgba(26, 26, 26, 0.98)' : 'rgba(255, 255, 255, 0.98)'};
+            backdrop-filter: blur(30px);
+            border-bottom: 1px solid rgba(212, 168, 67, 0.2);
+            max-height: ${props => props.active ? '500px' : '0'};
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            z-index: 999;
+
+            @media (min-width: 769px) {
+                display: none;
+            }
+        `;
+
+        const MobileMenuItem = styled.a`
+            display: block;
+            padding: 1rem 2rem;
+            color: ${props => props.isDark ? '#f0f0f0' : '#333333'};
+            text-decoration: none;
+            border-bottom: 1px solid rgba(212, 168, 67, 0.1);
+            cursor: pointer;
+            transition: all 0.3s ease;
+
+            &:hover {
+                background: rgba(212, 168, 67, 0.1);
+                color: #d4a843;
+            }
+        `;
+
+        const DesktopNav = styled.nav`
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+
+            @media (max-width: 768px) {
+                display: none;
+            }
+        `;
+
+        const NavLink = styled.a`
+            color: ${props => props.isDark ? '#f0f0f0' : '#333333'};
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+            position: relative;
+            transition: color 0.3s ease;
+
+            &::after {
+                content: '';
+                position: absolute;
+                bottom: -5px;
+                left: 0;
+                width: ${props => props.active ? '100%' : '0'};
+                height: 2px;
+                background: #d4a843;
+                transition: width 0.3s ease;
+            }
+
+            &:hover {
+                color: #d4a843;
+                
+                &::after {
+                    width: 100%;
+                }
+            }
+        `;
+
+        const ThemeToggle = styled.button`
+            background: none;
+            border: 2px solid #d4a843;
+            color: #d4a843;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+
+            &:hover {
+                background: #d4a843;
+                color: ${props => props.isDark ? '#1a1a1a' : '#ffffff'};
+                transform: scale(1.1);
+            }
+
+            @media (max-width: 768px) {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+        `;
+
+        // Hero Section
+        const HeroSection = styled.section`
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            padding-top: 80px;
+            background: linear-gradient(135deg, 
+                ${props => props.isDark ? '#1a1a1a' : '#ffffff'} 0%,
+                ${props => props.isDark ? '#2a2a2a' : '#f8f8f8'} 100%
+            );
+
+            @media (max-width: 768px) {
+                min-height: 80vh;
+                padding-top: 60px;
+            }
+        `;
+
+        const ParticleCanvas = styled.canvas`
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        `;
+
+        const HeroContent = styled.div`
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            max-width: 900px;
+            padding: 0 2rem;
+
+            @media (max-width: 768px) {
+                padding: 0 1rem;
+            }
+        `;
+
+        const HeroTitle = styled.h1`
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 900;
+            color: #333333;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #333333, #d4a843);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeIn 0.8s ease-out;
+
+            ${props => props.isDark && `
+                background: linear-gradient(135deg, #f0f0f0, #d4a843);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            `}
+        `;
+
+        const HeroSubtitle = styled.p`
+            font-size: 1.3rem;
+            color: #666666;
+            margin-bottom: 2rem;
+            animation: fadeIn 1s ease-out 0.2s both;
+
+            ${props => props.isDark && `
+                color: #cccccc;
+            `}
+        `;
+
+        const HeroStats = styled.div`
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin: 3rem 0;
+            flex-wrap: wrap;
+            animation: fadeIn 1s ease-out 0.4s both;
+
+            @media (max-width: 768px) {
+                gap: 1.5rem;
+            }
+        `;
+
+        const StatBox = styled.div`
+            background: linear-gradient(135deg, rgba(212, 168, 67, 0.1), rgba(212, 168, 67, 0.05));
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 168, 67, 0.3);
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+
+            &:hover {
+                transform: translateY(-5px);
+                border-color: #d4a843;
+                box-shadow: 0 8px 20px rgba(212, 168, 67, 0.15);
+            }
+        `;
+
+        const StatNumber = styled.div`
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: #d4a843;
+            display: block;
+        `;
+
+        const StatLabel = styled.div`
+            font-size: 0.95rem;
+            color: #666666;
+            margin-top: 0.5rem;
+            font-weight: 500;
+
+            ${props => props.isDark && `
+                color: #aaa;
+            `}
+        `;
+
+        // Buttons
+        const Button = styled.button`
+            padding: 1rem 2.5rem;
+            border-radius: 12px;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            text-decoration: none;
+
+            ${props => props.primary && `
+                background: linear-gradient(135deg, #d4a843, #e8c86e);
+                color: white;
+                box-shadow: 0 8px 20px rgba(212, 168, 67, 0.3);
+
+                &:hover {
+                    transform: translateY(-3px);
+                    box-shadow: 0 12px 30px rgba(212, 168, 67, 0.5);
+                }
+            `}
+
+            ${props => props.secondary && `
+                background: transparent;
+                color: #d4a843;
+                border: 2px solid #d4a843;
+
+                &:hover {
+                    background: #d4a843;
+                    color: white;
+                    transform: translateY(-3px);
+                }
+            `}
+        `;
+
+        // Section
+        const Section = styled.section`
+            padding: 5rem 5%;
+            max-width: 1280px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+
+            @media (max-width: 1024px) {
+                padding: 4rem 4%;
+            }
+
+            @media (max-width: 768px) {
+                padding: 3rem 4%;
+            }
+
+            @media (max-width: 480px) {
+                padding: 2rem 3%;
+            }
+        `;
+
+        const SectionLabel = styled.div`
+            display: inline-block;
+            color: #d4a843;
+            font-size: 0.9rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        `;
+
+        const SectionTitle = styled.h2`
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 900;
+            color: #333333;
+            margin-bottom: 3rem;
+            line-height: 1.2;
+
+            ${props => props.isDark && `
+                color: #f0f0f0;
+            `}
+        `;
+
+        // Glass Card
+        const GlassCard = styled.div`
+            background: ${props => props.isDark ? 'rgba(50, 50, 50, 0.8)' : 'rgba(255, 255, 255, 0.8)'};
+            backdrop-filter: blur(20px);
+            border: 1px solid ${props => props.isDark ? 'rgba(212, 168, 67, 0.2)' : 'rgba(212, 168, 67, 0.15)'};
+            border-radius: 20px;
+            padding: ${props => props.padding || '2rem'};
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+
+            &:hover {
+                transform: translateY(-5px);
+                border-color: #d4a843;
+                box-shadow: ${props => props.isDark 
+                    ? '0 12px 40px rgba(212, 168, 67, 0.15)' 
+                    : '0 12px 40px rgba(212, 168, 67, 0.2)'
+                };
+                background: ${props => props.isDark ? 'rgba(60, 60, 60, 0.9)' : 'rgba(255, 255, 255, 0.95)'};
+            }
+        `;
+
+        // Grid Layout
+        const GridLayout = styled.div`
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(${props => props.minWidth || '280px'}, 1fr));
+            gap: ${props => props.gap || '2rem'};
+            margin-top: 2rem;
+        `;
+
+        // Preloader
+        const PreloaderWrapper = styled.div`
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: ${props => props.isDark ? '#1a1a1a' : '#ffffff'};
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            opacity: ${props => props.active ? 1 : 0};
+            pointer-events: ${props => props.active ? 'auto' : 'none'};
+            transition: opacity 0.5s ease;
+        `;
+
+        const Loader = styled.div`
+            width: 60px;
+            height: 60px;
+            border: 5px solid rgba(212, 168, 67, 0.2);
+            border-top: 5px solid #d4a843;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        `;
+
+        // Footer
+        const FooterWrapper = styled.footer`
+            background: #333333;
+            color: #f0f0f0;
+            padding: 4rem 5%;
+            margin-top: 5rem;
+
+            ${props => props.isDark && `
+                background: #1a1a1a;
+                border-top: 1px solid rgba(212, 168, 67, 0.2);
+            `}
+        `;
+
+        const FooterContent = styled.div`
+            max-width: 1280px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        `;
+
+        const FooterColumn = styled.div`
+            h3 {
+                color: #d4a843;
+                margin-bottom: 1.5rem;
+                font-weight: 700;
+            }
+
+            ul {
+                list-style: none;
+            }
+
+            li {
+                margin-bottom: 0.75rem;
+            }
+
+            a {
+                color: #aaa;
+                text-decoration: none;
+                transition: color 0.3s ease;
+
+                &:hover {
+                    color: #d4a843;
+                }
+            }
+        `;
+
+        const SocialIcons = styled.div`
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        `;
+
+        const SocialIcon = styled.a`
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(212, 168, 67, 0.1);
+            color: #d4a843;
+            border-radius: 50%;
+            text-decoration: none;
+            transition: all 0.3s ease;
+
+            &:hover {
+                background: #d4a843;
+                color: #1a1a1a;
+                transform: translateY(-5px);
+            }
+        `;
+
+        const FooterBottom = styled.div`
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(212, 168, 67, 0.2);
+
+            p {
+                color: #888;
+                margin-bottom: 0.75rem;
+            }
+        `;
+
+        // Back to Top Button
+        const BackToTopBtn = styled.button`
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #d4a843, #e8c86e);
+            color: white;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            display: ${props => props.show ? 'flex' : 'none'};
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            z-index: 999;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(212, 168, 67, 0.3);
+
+            &:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 12px 30px rgba(212, 168, 67, 0.5);
+            }
+
+            @media (max-width: 768px) {
+                width: 45px;
+                height: 45px;
+                bottom: 1.5rem;
+                right: 1.5rem;
+            }
+        `;
+
+        // Sticky CTA
+        const StickyCTA = styled.button`
+            position: fixed;
+            bottom: 2rem;
+            left: 2rem;
+            background: linear-gradient(135deg, #d4a843, #e8c86e);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            z-index: 998;
+            font-weight: 700;
+            box-shadow: 0 8px 20px rgba(212, 168, 67, 0.3);
+            transition: all 0.3s ease;
+            animation: float 3s ease-in-out infinite;
+
+            &:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 12px 30px rgba(212, 168, 67, 0.5);
+            }
+
+            @media (max-width: 768px) {
+                padding: 0.75rem 1.5rem;
+                font-size: 0.9rem;
+                bottom: 1.5rem;
+                left: 1.5rem;
+            }
+
+            @media (max-width: 480px) {
+                padding: 0.65rem 1.2rem;
+                font-size: 0.8rem;
+                bottom: 1rem;
+                left: 1rem;
+            }
+        `;
+
+        // Carousel/Testimonials
+        const CarouselWrapper = styled.div`
+            position: relative;
+            margin: 2rem auto;
+            max-width: 700px;
+        `;
+
+        const CarouselControls = styled.div`
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+            align-items: center;
+        `;
+
+        const CarouselBtn = styled.button`
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(212, 168, 67, 0.1);
+            border: 2px solid #d4a843;
+            color: #d4a843;
+            cursor: pointer;
+            font-weight: 700;
+            transition: all 0.3s ease;
+
+            &:hover {
+                background: #d4a843;
+                color: white;
+                transform: scale(1.1);
+            }
+        `;
+
+        // FAQ
+        const FAQItem = styled.div`
+            background: ${props => props.isDark ? 'rgba(50, 50, 50, 0.5)' : 'rgba(212, 168, 67, 0.05)'};
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            border: 1px solid rgba(212, 168, 67, 0.2);
+        `;
+
+        const FAQQuestion = styled.div`
+            padding: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+            transition: all 0.3s ease;
+
+            &:hover {
+                background: rgba(212, 168, 67, 0.1);
+            }
+        `;
+
+        const FAQText = styled.div`
+            font-weight: 700;
+            color: ${props => props.isDark ? '#f0f0f0' : '#333333'};
+        `;
+
+        const FAQToggle = styled.div`
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(212, 168, 67, 0.1);
+            color: #d4a843;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            transform: ${props => props.active ? 'rotate(180deg)' : 'rotate(0)'};
+        `;
+
+        const FAQAnswer = styled.div`
+            max-height: ${props => props.active ? '500px' : '0'};
+            overflow: hidden;
+            padding: ${props => props.active ? '0 1.5rem 1.5rem' : '0'};
+            color: ${props => props.isDark ? '#aaa' : '#666'};
+            line-height: 1.8;
+            transition: all 0.3s ease;
+        `;
+
+        // Contact Form
+        const ContactForm = styled.form`
+            background: ${props => props.isDark ? 'rgba(50, 50, 50, 0.5)' : 'rgba(255, 255, 255, 0.8)'};
+            backdrop-filter: blur(10px);
+            padding: 3rem;
+            border-radius: 16px;
+            border: 1px solid rgba(212, 168, 67, 0.2);
+            max-width: 600px;
+            margin: 2rem auto;
+
+            @media (max-width: 768px) {
+                padding: 2rem;
+            }
+        `;
+
+        const FormGroup = styled.div`
+            margin-bottom: 1.5rem;
+        `;
+
+        const FormLabel = styled.label`
+            display: block;
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+            color: ${props => props.isDark ? '#d4a843' : '#333333'};
+        `;
+
+        const FormInput = styled.input`
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid rgba(212, 168, 67, 0.2);
+            border-radius: 10px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: ${props => props.isDark ? 'rgba(30, 30, 30, 0.8)' : 'rgba(255, 255, 255, 0.8)'};
+            color: ${props => props.isDark ? '#f0f0f0' : '#333333'};
+
+            &:focus {
+                outline: none;
+                border-color: #d4a843;
+                box-shadow: 0 0 20px rgba(212, 168, 67, 0.3);
+            }
+        `;
+
+        const FormTextarea = styled.textarea`
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid rgba(212, 168, 67, 0.2);
+            border-radius: 10px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            min-height: 150px;
+            resize: vertical;
+            transition: all 0.3s ease;
+            background: ${props => props.isDark ? 'rgba(30, 30, 30, 0.8)' : 'rgba(255, 255, 255, 0.8)'};
+            color: ${props => props.isDark ? '#f0f0f0' : '#333333'};
+
+            &:focus {
+                outline: none;
+                border-color: #d4a843;
+                box-shadow: 0 0 20px rgba(212, 168, 67, 0.3);
+            }
+        `;
+
+        // ★ PARTICLE CANVAS COMPONENT ★
+        const ParticleBackground = ({ isDark }) => {
+            const canvasRef = useRef(null);
+
+            useEffect(() => {
+                const canvas = canvasRef.current;
+                if (!canvas) return;
+
+                const ctx = canvas.getContext('2d');
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+
+                const particles = [];
+                const particleCount = 50;
+
+                class Particle {
+                    constructor() {
+                        this.x = Math.random() * canvas.width;
+                        this.y = Math.random() * canvas.height;
+                        this.size = Math.random() * 2 + 1;
+                        this.speedX = Math.random() * 0.5 - 0.25;
+                        this.speedY = Math.random() * 0.5 - 0.25;
+                        this.opacity = Math.random() * 0.5 + 0.3;
+                    }
+
+                    update() {
+                        this.x += this.speedX;
+                        this.y += this.speedY;
+
+                        if (this.x > canvas.width) this.x = 0;
+                        if (this.x < 0) this.x = canvas.width;
+                        if (this.y > canvas.height) this.y = 0;
+                        if (this.y < 0) this.y = canvas.height;
+                    }
+
+                    draw() {
+                        ctx.fillStyle = `rgba(212, 168, 67, ${this.opacity})`;
+                        ctx.beginPath();
+                        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                        ctx.fill();
+                    }
+                }
+
+                for (let i = 0; i < particleCount; i++) {
+                    particles.push(new Particle());
+                }
+
+                const animate = () => {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                    particles.forEach(particle => {
+                        particle.update();
+                        particle.draw();
+                    });
+
+                    // Draw connecting lines
+                    particles.forEach((particle, i) => {
+                        for (let j = i + 1; j < particles.length; j++) {
+                            const dx = particles[j].x - particle.x;
+                            const dy = particles[j].y - particle.y;
+                            const distance = Math.sqrt(dx * dx + dy * dy);
+
+                            if (distance < 100) {
+                                ctx.strokeStyle = `rgba(212, 168, 67, ${0.2 * (1 - distance / 100)})`;
+                                ctx.lineWidth = 1;
+                                ctx.beginPath();
+                                ctx.moveTo(particle.x, particle.y);
+                                ctx.lineTo(particles[j].x, particles[j].y);
+                                ctx.stroke();
+                            }
+                        }
+                    });
+
+                    requestAnimationFrame(animate);
+                };
+
+                animate();
+
+                const handleResize = () => {
+                    canvas.width = window.innerWidth;
+                    canvas.height = window.innerHeight;
+                };
+
+                window.addEventListener('resize', handleResize);
+                return () => window.removeEventListener('resize', handleResize);
+            }, []);
+
+            return <ParticleCanvas ref={canvasRef} />;
+        };
+
+        // ★ MAIN APP COMPONENT ★
+        const App = () => {
+            const [isDark, setIsDark] = useState(false);
+            const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+            const [showPreloader, setShowPreloader] = useState(true);
+            const [showBackToTop, setShowBackToTop] = useState(false);
+            const [scrolled, setScrolled] = useState(false);
+            const [activeTestimonial, setActiveTestimonial] = useState(0);
+            const [activeFAQ, setActiveFAQ] = useState(null);
+            const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
+
+            // Theme from localStorage
+            useEffect(() => {
+                const saved = localStorage.getItem('theme');
+                if (saved === 'dark') {
+                    setIsDark(true);
+                    document.body.classList.add('dark-mode');
+                }
+            }, []);
+
+            // Preloader
+            useEffect(() => {
+                setTimeout(() => setShowPreloader(false), 2500);
+            }, []);
+
+            // Scroll effects
+            useEffect(() => {
+                const handleScroll = () => {
+                    setShowBackToTop(window.scrollY > 500);
+                    setScrolled(window.scrollY > 50);
+                };
+
+                window.addEventListener('scroll', handleScroll);
+                return () => window.removeEventListener('scroll', handleScroll);
+            }, []);
+
+            // Toggle theme
+            const toggleTheme = () => {
+                const newTheme = !isDark;
+                setIsDark(newTheme);
+                localStorage.setItem('theme', newTheme ? 'dark' : 'light');
+                document.body.classList.toggle('dark-mode');
+            };
+
+            // Scroll to top
+            const scrollToTop = () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            };
+
+            // Testimonials data
+            const testimonials = [
+                {
+                    text: "Working with Moe Kyaw Aung was exceptional. His expertise in Android architecture and clean code practices transformed our project.",
+                    author: "John Smith",
+                    title: "Project Manager @ Tech Corp"
+                },
+                {
+                    text: "Outstanding developer with deep knowledge of Kotlin and modern Android practices. Delivered beyond expectations!",
+                    author: "Sarah Johnson",
+                    title: "CTO @ StartupXYZ"
+                },
+                {
+                    text: "One of the best Android developers I've worked with. Attention to detail and problem-solving skills are unmatched.",
+                    author: "Michael Chen",
+                    title: "Product Owner @ TechHub"
+                },
+                {
+                    text: "Professional approach, excellent communication, and technical prowess. Moe delivered our project on time and beyond scope.",
+                    author: "Emma Davis",
+                    title: "Business Manager @ Enterprise Corp"
+                },
+                {
+                    text: "Fantastic developer! His Firebase expertise and architectural insights were invaluable to our product's success.",
+                    author: "Robert Wilson",
+                    title: "Lead Developer @ CloudTech"
+                }
+            ];
+
+            // FAQ data
+            const faqs = [
+                {
+                    q: "What are your core expertise areas?",
+                    a: "Primary expertise is Android development with Kotlin and Jetpack. Also extensive experience in web development (React, Node.js), databases (PostgreSQL, MongoDB), cloud services (Firebase, Azure), and DevOps practices."
+                },
+                {
+                    q: "Do you offer freelance work?",
+                    a: "Yes! I offer freelance services including full-stack development, architecture consulting, code reviews, and mentoring. Feel free to reach out with project details."
+                },
+                {
+                    q: "What's your typical project timeline?",
+                    a: "Project timelines vary based on scope. Small features can be completed in 2-4 weeks, while larger projects may take 2-6 months. We'll establish clear timelines during consultation."
+                },
+                {
+                    q: "How do you ensure code quality?",
+                    a: "I follow industry best practices including clean architecture, SOLID principles, comprehensive testing (unit, integration, UI), code reviews, and continuous integration/deployment pipelines."
+                },
+                {
+                    q: "Can you help with app deployment?",
+                    a: "Absolutely! I assist with deploying apps to Google Play Store, Apple App Store, web servers, or cloud platforms. I'm experienced with CI/CD pipelines using GitHub Actions and Azure DevOps."
+                }
+            ];
+
+            // Handle form
+            const handleFormSubmit = (e) => {
+                e.preventDefault();
+                alert('Thank you for your message! I will get back to you soon.');
+                setFormData({ name: '', email: '', subject: '', message: '' });
+            };
+
+            const handleFormChange = (e) => {
+                const { name, value } = e.target;
+                setFormData(prev => ({ ...prev, [name]: value }));
+            };
+
+            return (
+                <AppWrapper isDark={isDark}>
+                    {/* Preloader */}
+                    <PreloaderWrapper isDark={isDark} active={showPreloader}>
+                        <Loader />
+                    </PreloaderWrapper>
+
+                    {/* Navigation */}
+                    <NavBar isDark={isDark} scrolled={scrolled}>
+                        <Logo> MKA</Logo>
+                        <DesktopNav>
+                            <NavLink active href="#home" isDark={isDark}>Home</NavLink>
+                            <NavLink href="#about" isDark={isDark}>About</NavLink>
+                            <NavLink href="#skills" isDark={isDark}>Skills</NavLink>
+                            <NavLink href="#projects" isDark={isDark}>Projects</NavLink>
+                            <NavLink href="#contact" isDark={isDark}>Contact</NavLink>
+                            <ThemeToggle onClick={toggleTheme} isDark={isDark}>
+                                {isDark ? '☀️' : '🌙'}
+                            </ThemeToggle>
+                        </DesktopNav>
+
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                            <ThemeToggle onClick={toggleTheme} isDark={isDark} style={{ display: 'none' }}>
+                                {isDark ? '☀️' : '🌙'}
+                            </ThemeToggle>
+                            <HamburgerButton 
+                                isDark={isDark} 
+                                active={mobileMenuOpen} 
+                                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                            >
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </HamburgerButton>
+                        </div>
+                    </NavBar>
+
+                    <MobileMenu isDark={isDark} active={mobileMenuOpen}>
+                        <MobileMenuItem onClick={() => { setMobileMenuOpen(false); window.location.hash = '#home'; }}>Home</MobileMenuItem>
+                        <MobileMenuItem onClick={() => { setMobileMenuOpen(false); window.location.hash = '#about'; }}>About</MobileMenuItem>
+                        <MobileMenuItem onClick={() => { setMobileMenuOpen(false); window.location.hash = '#skills'; }}>Skills</MobileMenuItem>
+                        <MobileMenuItem onClick={() => { setMobileMenuOpen(false); window.location.hash = '#projects'; }}>Projects</MobileMenuItem>
+                        <MobileMenuItem onClick={() => { setMobileMenuOpen(false); window.location.hash = '#contact'; }}>Contact</MobileMenuItem>
+                        <MobileMenuItem onClick={() => { toggleTheme(); setMobileMenuOpen(false); }}>
+                            {isDark ? 'Light Mode' : 'Dark Mode'}
+                        </MobileMenuItem>
+                    </MobileMenu>
+
+                    {/* Hero Section */}
+                    <HeroSection id="home" isDark={isDark}>
+                        <ParticleBackground isDark={isDark} />
+                        <HeroContent>
+                            <HeroTitle isDark={isDark}>
+                                MOE KYAW AUNG
+                            </HeroTitle>
+                            <HeroSubtitle isDark={isDark}>
+                                Android Senior Developer | 12+ Years Experience
+                            </HeroSubtitle>
+                            <HeroSubtitle isDark={isDark} style={{ fontSize: '1.1rem', marginBottom: '2rem' }}>
+                                Expert in Kotlin, Jetpack Compose, Firebase & Clean Architecture
+                            </HeroSubtitle>
+
+                            <HeroStats>
+                                <StatBox>
+                                    <StatNumber>12+</StatNumber>
+                                    <StatLabel isDark={isDark}>Years Experience</StatLabel>
+                                </StatBox>
+                                <StatBox>
+                                    <StatNumber>3000+</StatNumber>
+                                    <StatLabel isDark={isDark}>Apps Built</StatLabel>
+                                </StatBox>
+                                <StatBox>
+                                    <StatNumber>122</StatNumber>
+                                    <StatLabel isDark={isDark}>GitHub Repos</StatLabel>
+                                </StatBox>
+                                <StatBox>
+                                    <StatNumber>100%</StatNumber>
+                                    <StatLabel isDark={isDark}>Satisfaction</StatLabel>
+                                </StatBox>
+                            </HeroStats>
+
+                            <div style={{ marginTop: '2rem', display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+                                <Button primary onClick={() => window.location.hash = '#projects'}>View Projects</Button>
+                                <Button secondary onClick={() => window.location.hash = '#contact'}>Contact Me</Button>
+                            </div>
+                        </HeroContent>
+                    </HeroSection>
+
+                    {/* About Section */}
+                    <Section id="about" isDark={isDark}>
+                        <SectionLabel>Who I Am</SectionLabel>
+                        <SectionTitle isDark={isDark}>Developer by Passion, Builder by Nature</SectionTitle>
+
+                        <GridLayout minWidth="100%">
+                            <GlassCard isDark={isDark} style={{ gridColumn: '1 / -1' }}>
+                                <p style={{ fontSize: '1.1rem', lineHeight: '1.8', marginBottom: '1.5rem' }}>
+                                    I am a passionate Android developer with nearly 12 years of hands-on experience building secure, scalable, and user-friendly mobile applications. Strong expertise in <strong>Kotlin</strong> and modern <strong>Jetpack</strong> development (Compose, ViewModel, Room), <strong>Firebase</strong> integration, and <strong>REST API</strong> consumption.
+                                </p>
+                                <p style={{ fontSize: '1.1rem', lineHeight: '1.8', marginBottom: '1.5rem' }}>
+                                    I focus on clean architecture, maintainable code, and practical security implementations. Comfortable delivering features end-to-end—from UI to networking, local caching, testing, and release-ready builds.
+                                </p>
+                                <p style={{ fontSize: '1.1rem', lineHeight: '1.8' }}>
+                                    Passionate about continuous learning and staying updated with industry best practices. Whether you need a full-scale project, architectural guidance, or team mentoring, I'm here to help.
+                                </p>
+                            </GlassCard>
+                        </GridLayout>
+                    </Section>
+
+                    {/* Skills Section */}
+                    <Section id="skills" isDark={isDark}>
+                        <SectionLabel>Expertise</SectionLabel>
+                        <SectionTitle isDark={isDark}>Skills & Technologies</SectionTitle>
+
+                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', justifyContent: 'center', marginTop: '2rem' }}>
+                            {['🤖 Kotlin', '💚 Jetpack Compose', '🏗️ Clean Architecture', '📐 MVVM/MVI', '🔥 Firebase', '🌐 REST APIs', '💾 Room Database', '🧪 Testing', '⚙️ CI/CD', '🐙 GitHub', '☁️ Azure', '🔐 Security', '⚛️ React', '🐍 Python', '☕ Java', '🗄️ PostgreSQL', '🐳 Docker', '🤖 AI/ML'].map((skill, idx) => (
+                                <GlassCard 
+                                    key={idx} 
+                                    isDark={isDark} 
+                                    padding="1rem 2rem"
+                                    style={{ 
+                                        borderRadius: '50px',
+                                        display: 'inline-block',
+                                        fontSize: '1rem',
+                                        fontWeight: '600',
+                                        border: `2px solid #d4a843`,
+                                        background: 'transparent'
+                                    }}
+                                >
+                                    {skill}
+                                </GlassCard>
+                            ))}
+                        </div>
+                    </Section>
+
+                    {/* Projects Section */}
+                    <Section id="projects" isDark={isDark}>
+                        <SectionLabel>Portfolio</SectionLabel>
+                        <SectionTitle isDark={isDark}>Featured Projects</SectionTitle>
+
+                        <GridLayout minWidth="260px">
+                            {[
+                                { icon: '📱', name: 'Social Dashboard', desc: 'Real-time analytics with Firebase' },
+                                { icon: '🎮', name: 'Game Collection', desc: 'Interactive games in Jetpack Compose' },
+                                { icon: '🌐', name: 'PWA App', desc: 'Progressive Web App with offline support' },
+                                { icon: '💼', name: 'Job Portal', desc: 'Full-stack job matching platform' },
+                                { icon: '🛒', name: 'POS System', desc: 'Complete retail management solution' },
+                                { icon: '🎬', name: 'Video Player', desc: 'Advanced media player' },
+                                { icon: '🌦️', name: 'Weather App', desc: 'Real-time weather forecasts' },
+                                { icon: '📋', name: 'Daily Planner', desc: 'Productivity and task management' },
+                                { icon: '🏥', name: 'Hospital Lists', desc: 'Healthcare facility directory' }
+                            ].map((project, idx) => (
+                                <GlassCard key={idx} isDark={isDark} padding="2rem 1.5rem" style={{ textAlign: 'center' }}>
+                                    <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>{project.icon}</div>
+                                    <h3 style={{ color: '#d4a843', marginBottom: '0.75rem', fontSize: '1.2rem', fontWeight: '700' }}>{project.name}</h3>
+                                    <p style={{ color: isDark ? '#aaa' : '#666', marginBottom: '1.5rem' }}>{project.desc}</p>
+                                    <Button primary style={{ width: '100%' }}>View Project</Button>
+                                </GlassCard>
+                            ))}
+                        </GridLayout>
+                    </Section>
+
+                    {/* Testimonials Section */}
+                    <Section isDark={isDark}>
+                        <SectionLabel>Social Proof</SectionLabel>
+                        <SectionTitle isDark={isDark}>Client Feedback</SectionTitle>
+
+                        <CarouselWrapper>
+                            <GlassCard isDark={isDark} padding="3rem">
+                                <p style={{ fontSize: '1.1rem', fontStyle: 'italic', lineHeight: '1.8', marginBottom: '2rem' }}>
+                                    "{testimonials[activeTestimonial].text}"
+                                </p>
+                                <div style={{ fontWeight: '700', color: '#d4a843', marginBottom: '0.5rem' }}>
+                                    {testimonials[activeTestimonial].author}
+                                </div>
+                                <div style={{ fontSize: '0.95rem', color: isDark ? '#888' : '#999' }}>
+                                    {testimonials[activeTestimonial].title}
+                                </div>
+                            </GlassCard>
+
+                            <CarouselControls>
+                                <CarouselBtn onClick={() => setActiveTestimonial((activeTestimonial - 1 + testimonials.length) % testimonials.length)}>❮</CarouselBtn>
+                                <span style={{ color: '#d4a843', fontWeight: '700' }}>
+                                    {activeTestimonial + 1} / {testimonials.length}
+                                </span>
+                                <CarouselBtn onClick={() => setActiveTestimonial((activeTestimonial + 1) % testimonials.length)}>❯</CarouselBtn>
+                            </CarouselControls>
+                        </CarouselWrapper>
+                    </Section>
+
+                    {/* Pricing Section */}
+                    <Section isDark={isDark}>
+                        <SectionLabel>Services</SectionLabel>
+                        <SectionTitle isDark={isDark}>Consulting Packages</SectionTitle>
+
+                        <GridLayout minWidth="280px">
+                            {[
+                                {
+                                    name: 'Consultation',
+                                    price: '$50',
+                                    period: '/hour',
+                                    features: ['1-on-1 Technical Review', 'Code Architecture Analysis', 'Best Practices Guidance', 'Email Support']
+                                },
+                                {
+                                    name: 'Mentorship',
+                                    price: '$200',
+                                    period: '/month',
+                                    features: ['4 Mentoring Sessions', 'Code Review Sessions', 'Project Guidance', '24/7 Chat Support', 'Resource Library'],
+                                    featured: true
+                                },
+                                {
+                                    name: 'Project Work',
+                                    price: 'Custom',
+                                    period: '/project',
+                                    features: ['Full Development', 'Architecture Design', 'Quality Assurance', 'Post-Launch Support', 'Deployment']
+                                }
+                            ].map((pkg, idx) => (
+                                <GlassCard 
+                                    key={idx} 
+                                    isDark={isDark} 
+                                    padding="2rem"
+                                    style={{
+                                        position: 'relative',
+                                        transform: pkg.featured ? 'scale(1.05)' : 'scale(1)',
+                                        border: pkg.featured ? '2px solid #d4a843' : '1px solid rgba(212, 168, 67, 0.15)'
+                                    }}
+                                >
+                                    {pkg.featured && (
+                                        <div style={{
+                                            position: 'absolute',
+                                            top: '-15px',
+                                            right: '30px',
+                                            background: '#d4a843',
+                                            color: 'white',
+                                            padding: '0.5rem 1.5rem',
+                                            borderRadius: '20px',
+                                            fontWeight: '700',
+                                            fontSize: '0.85rem'
+                                        }}>
+                                            POPULAR
+                                        </div>
+                                    )}
+                                    <div style={{ fontSize: '1.5rem', fontWeight: '700', color: isDark ? '#f0f0f0' : '#333', marginBottom: '0.75rem' }}>
+                                        {pkg.name}
+                                    </div>
+                                    <div style={{ fontSize: '2.5rem', fontWeight: '900', color: '#d4a843', marginBottom: '1.5rem' }}>
+                                        {pkg.price}
+                                        <span style={{ fontSize: '1rem', color: isDark ? '#aaa' : '#666' }}>{pkg.period}</span>
+                                    </div>
+                                    <ul style={{ listStyle: 'none', marginBottom: '2rem' }}>
+                                        {pkg.features.map((feature, fidx) => (
+                                            <li key={fidx} style={{ padding: '0.75rem 0', borderBottom: `1px solid rgba(212, 168, 67, 0.1)`, color: isDark ? '#aaa' : '#666' }}>
+                                                <span style={{ color: '#d4a843', marginRight: '0.5rem' }}>✓</span>
+                                                {feature}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                    <Button primary style={{ width: '100%' }}>Get Started</Button>
+                                </GlassCard>
+                            ))}
+                        </GridLayout>
+                    </Section>
+
+                    {/* FAQ Section */}
+                    <Section isDark={isDark}>
+                        <SectionLabel>Questions</SectionLabel>
+                        <SectionTitle isDark={isDark}>Frequently Asked Questions</SectionTitle>
+
+                        <div style={{ maxWidth: '700px', margin: '0 auto' }}>
+                            {faqs.map((faq, idx) => (
+                                <FAQItem key={idx} isDark={isDark}>
+                                    <FAQQuestion onClick={() => setActiveFAQ(activeFAQ === idx ? null : idx)}>
+                                        <FAQText isDark={isDark}>{faq.q}</FAQText>
+                                        <FAQToggle active={activeFAQ === idx}>+</FAQToggle>
+                                    </FAQQuestion>
+                                    <FAQAnswer active={activeFAQ === idx} isDark={isDark}>
+                                        {faq.a}
+                                    </FAQAnswer>
+                                </FAQItem>
+                            ))}
+                        </div>
+                    </Section>
+
+                    {/* Contact Section */}
+                    <Section id="contact" isDark={isDark}>
+                        <SectionLabel>Get In Touch</SectionLabel>
+                        <SectionTitle isDark={isDark}>Contact Me</SectionTitle>
+
+                        <ContactForm isDark={isDark} onSubmit={handleFormSubmit}>
+                            <FormGroup>
+                                <FormLabel htmlFor="name" isDark={isDark}>Full Name</FormLabel>
+                                <FormInput 
+                                    id="name"
+                                    type="text" 
+                                    name="name" 
+                                    placeholder="Your name" 
+                                    value={formData.name}
+                                    onChange={handleFormChange}
+                                    isDark={isDark}
+                                    required 
+                                />
+                            </FormGroup>
+
+                            <FormGroup>
+                                <FormLabel htmlFor="email" isDark={isDark}>Email</FormLabel>
+                                <FormInput 
+                                    id="email"
+                                    type="email" 
+                                    name="email" 
+                                    placeholder="your@email.com" 
+                                    value={formData.email}
+                                    onChange={handleFormChange}
+                                    isDark={isDark}
+                                    required 
+                                />
+                            </FormGroup>
+
+                            <FormGroup>
+                                <FormLabel htmlFor="subject" isDark={isDark}>Subject</FormLabel>
+                                <FormInput 
+                                    id="subject"
+                                    type="text" 
+                                    name="subject" 
+                                    placeholder="Project inquiry" 
+                                    value={formData.subject}
+                                    onChange={handleFormChange}
+                                    isDark={isDark}
+                                    required 
+                                />
+                            </FormGroup>
+
+                            <FormGroup>
+                                <FormLabel htmlFor="message" isDark={isDark}>Message</FormLabel>
+                                <FormTextarea 
+                                    id="message"
+                                    name="message" 
+                                    placeholder="Tell me about your project..." 
+                                    value={formData.message}
+                                    onChange={handleFormChange}
+                                    isDark={isDark}
+                                    required 
+                                />
+                            </FormGroup>
+
+                            <Button primary style={{ width: '100%' }}>Send Message →</Button>
+                        </ContactForm>
+
+                        {/* Newsletter */}
+                        <div style={{ marginTop: '3rem', textAlign: 'center' }}>
+                            <SectionLabel>Newsletter</SectionLabel>
+                            <h3 style={{ fontSize: '1.5rem', fontWeight: '700', marginBottom: '1.5rem', color: isDark ? '#f0f0f0' : '#333' }}>
+                                Stay Updated With Latest Posts
+                            </h3>
+                            <div style={{ display: 'flex', gap: '1rem', maxWidth: '500px', margin: '0 auto', flexWrap: 'wrap' }}>
+                                <FormInput 
+                                    type="email" 
+                                    placeholder="Enter your email..." 
+                                    isDark={isDark}
+                                    style={{ flex: 1, minWidth: '200px' }}
+                                    required 
+                                />
+                                <Button primary>Subscribe 📧</Button>
+                            </div>
+                        </div>
+                    </Section>
+
+                    {/* Footer */}
+                    <FooterWrapper isDark={isDark}>
+                        <FooterContent>
+                            <FooterColumn>
+                                <h3>About</h3>
+                                <ul>
+                                    <li><a href="#about">About Me</a></li>
+                                    <li><a href="#skills">Skills</a></li>
+                                    <li><a href="#projects">Projects</a></li>
+                                    <li><a href="#contact">Contact</a></li>
+                                </ul>
+                            </FooterColumn>
+
+                            <FooterColumn>
+                                <h3>Resources</h3>
+                                <ul>
+                                    <li><a href="https://github.com/Dev-moe-kyawaung" target="_blank" rel="noreferrer">GitHub</a></li>
+                                    <li><a href="https://gravatar.com/moekyawaung2026" target="_blank" rel="noreferrer">Gravatar</a></li>
+                                    <li><a href="tel:+959889000889">Call +95 9 889 000 889</a></li>
+                                    <li><a href="mailto:moekyawaung@example.com">Email</a></li>
+                                </ul>
+                            </FooterColumn>
+
+                            <FooterColumn>
+                                <h3>Connect</h3>
+                                <SocialIcons>
+                                    <SocialIcon href="https://github.com/Dev-moe-kyawaung" target="_blank" rel="noreferrer" title="GitHub">
+                                        <i className="fab fa-github"></i>
+                                    </SocialIcon>
+                                    <SocialIcon href="https://linkedin.com" target="_blank" rel="noreferrer" title="LinkedIn">
+                                        <i className="fab fa-linkedin"></i>
+                                    </SocialIcon>
+                                    <SocialIcon href="mailto:moekyawaung@example.com" title="Email">
+                                        <i className="fas fa-envelope"></i>
+                                    </SocialIcon>
+                                    <SocialIcon href="https://telegram.me" target="_blank" rel="noreferrer" title="Telegram">
+                                        <i className="fab fa-telegram"></i>
+                                    </SocialIcon>
+                                    <SocialIcon href="https://instagram.com" target="_blank" rel="noreferrer" title="Instagram">
+                                        <i className="fab fa-instagram"></i>
+                                    </SocialIcon>
+                                </SocialIcons>
+                            </FooterColumn>
+
+                            <FooterColumn>
+                                <h3>Location</h3>
+                                <p>Tachileik, Myanmar 🇲🇲</p>
+                                <p>Bangkok, Thailand 🇹🇭</p>
+                                <p>+95 9 889 000 889</p>
+                                <p>+95 9 666 000 050</p>
+                            </FooterColumn>
+                        </FooterContent>
+
+                        <FooterBottom>
+                            <p>© 2024 Moe Kyaw Aung. All rights reserved.</p>
+                            <p>Portfolio V122 | Built with ❤️ using React & styled-components</p>
+                        </FooterBottom>
+                    </FooterWrapper>
+
+                    {/* Back to Top Button */}
+                    <BackToTopBtn show={showBackToTop} onClick={scrollToTop}>↑</BackToTopBtn>
+
+                    {/* Sticky CTA */}
+                    <StickyCTA onClick={() => window.location.hash = '#contact'}>
+                        Let's Work Together 💼
+                    </StickyCTA>
+                </AppWrapper>
+            );
+        };
+
+        // ★ RENDER APP ★
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    </script>
+</body>
+</html>
